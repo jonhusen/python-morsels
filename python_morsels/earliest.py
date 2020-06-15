@@ -43,19 +43,25 @@ def get_earliest(*args):
     Returns: Earliest date as a string
 
     """
+    # Original implementation
+    # dates = [tuple(arg.split("/")) for arg in args]
+    # earliest = dates[0]
+    # for date in dates:
+    #     m1, d1, y1 = earliest
+    #     m2, d2, y2 = date
+    #     if y1 < y2:
+    #         continue
+    #     elif y1 == y2:
+    #         if m1 < m2:
+    #             continue
+    #         elif m1 == m2:
+    #             if d1 < d2:
+    #                 continue
+    #     earliest = date
+    # return "/".join(earliest)
 
-    dates = [tuple(arg.split("/")) for arg in args]
-    earliest = dates[0]
-    for date in dates:
-        m1, d1, y1 = earliest
-        m2, d2, y2 = date
-        if y1 < y2:
-            continue
-        elif y1 == y2:
-            if m1 < m2:
-                continue
-            elif m1 == m2:
-                if d1 < d2:
-                    continue
-        earliest = date
-    return "/".join(earliest)
+    # PM solution
+    def date_key(date):
+        (m, d, y) = date.split("/")
+        return (y, m, d)
+    return min(args, key=date_key)
