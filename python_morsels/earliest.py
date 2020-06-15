@@ -33,20 +33,29 @@ So if you complete the bonus, this should work:
 "03/29/1945"
 """
 
-def get_earliest (date1, date2):
-    m1, d1, y1 = date1.split("/")
-    m2, d2, y2 = date2.split("/")
-    if y1 < y2:
-        return date1
-    elif y2 < y1:
-        return date2
-    else:
-        if m1 < m2:
-            return date1
-        elif m2 < m1:
-            return date2
-        else:
-            if d1 < d2:
-                return date1
-            elif d2 < d1:
-                return date2
+
+def get_earliest(*args):
+    """Takes US-format dates as strings and returns the earliest
+
+    Args:
+        *args: Tuple of dates of arbitrary length
+
+    Returns: Earliest date as a string
+
+    """
+
+    dates = [tuple(arg.split("/")) for arg in args]
+    earliest = dates[0]
+    for date in dates:
+        m1, d1, y1 = earliest
+        m2, d2, y2 = date
+        if y1 < y2:
+            continue
+        elif y1 == y2:
+            if m1 < m2:
+                continue
+            elif m1 == m2:
+                if d1 < d2:
+                    continue
+        earliest = date
+    return "/".join(earliest)
