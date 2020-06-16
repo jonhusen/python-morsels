@@ -12,3 +12,6 @@ def count_words(phrase):
     #     else:
     #         word_count.update({word: 1})
     # return word_count
+
+    # Python Morsels solution
+    # return Counter(re.findall(r"\b[\w'-]\b", phrase.casefold()))
