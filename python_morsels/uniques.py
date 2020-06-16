@@ -39,4 +39,4 @@ This one is a little harder to test. There's an automated test
 """
 
 def uniques_only(iterable):
-    return list(set(iterable))
+    return list(dict.fromkeys(iterable))
